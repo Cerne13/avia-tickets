@@ -38,7 +38,7 @@ class Locations {
 		return cities.reduce((acc, city) => {
 			const countryName = this.getCountryNameByCode(city.country_code);
 			const cityName = city.name || city.name_translations.en;
-			const key = `${cityName},${countryName}`;
+			const key = `${cityName}, ${countryName}`;
 			acc[key] = city;
 			return acc;
 		}, {});

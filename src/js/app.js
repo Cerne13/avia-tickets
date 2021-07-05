@@ -1,11 +1,31 @@
 import '../css/style.css';
 import locations from './store/locations';
 import './plugins';
+import formUI from './views/form';
 
-locations.init().then(res => {
-	console.log(res);
-	console.log(locations);
+document.addEventListener('DOMContentLoaded', e => {
+	const form = formUI.form;
 
-	const peruArr = locations.getCitiesByCountryCode('PE');
-	console.log(peruArr);
+	//Events
+	initApp();
+
+	form.addEventListener('submit', e => {
+		e.preventDefault();
+		onFormSubmit();
+	});
+
+	//Handlers
+	async function initApp() {
+		await locations.init();
+		formUI.setAutocompleteData(locations.shortCitiesList);
+	}
+
+	async function onFormSubmit() {
+		const origin = formUI.originValue;
+		const destination = formUI.destinationValue;
+		const depart_date = formUI.departDateValue;
+		const return_date = formUI.returnDateValue;
+
+		console.log(origin, destination, depart_date, return_date);
+	}
 });
