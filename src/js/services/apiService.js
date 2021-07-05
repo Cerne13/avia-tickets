@@ -7,7 +7,7 @@ class Api {
 	}
 	async countries() {
 		try {
-			const response = await axios.get(`${this.url}countries`);
+			const response = await axios.get(`${this.url}/countries`);
 			return response.data;
 		} catch (error) {
 			console.log(error);
@@ -17,7 +17,7 @@ class Api {
 
 	async cities() {
 		try {
-			const response = await axios.get(`${this.url}cities`);
+			const response = await axios.get(`${this.url}/cities`);
 			return response.data;
 		} catch (error) {
 			console.log(error);
@@ -25,7 +25,15 @@ class Api {
 		}
 	}
 
-	async prices(params) {}
+	async prices(params) {
+		try {
+			const response = await axios.get(`${this.url}prices`);
+			return response.data;
+		} catch (error) {
+			console.log(error);
+			return Promise.reject(error);
+		}
+	}
 }
 
 const api = new Api(config);

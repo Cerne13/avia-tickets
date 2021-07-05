@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', e => {
 	}
 
 	async function onFormSubmit() {
-		const origin = formUI.originValue;
-		const destination = formUI.destinationValue;
+		const origin = locations.getCityCodeByKey(formUI.originValue);
+		const destination = locations.getCityCodeByKey(formUI.destinationValue);
 		const depart_date = formUI.departDateValue;
 		const return_date = formUI.returnDateValue;
 
