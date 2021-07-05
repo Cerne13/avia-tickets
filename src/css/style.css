@@ -1,7 +1,3 @@
-body {
-	font-size: 20px;
-}
-
 .d-flex {
 	display: flex;
 }
@@ -32,11 +28,11 @@ body {
 }
 
 /* Header styles */
-.header nav .brand-logo {
+.header .brand-logo {
 	position: static;
 }
 
-.header .select-wrapper input.select-dropdown {
+.header .currency-select input.select-dropdown {
 	margin: 0;
 	color: #fff;
 	border-bottom: none;
@@ -51,12 +47,11 @@ body {
 }
 
 .header .currency-select .caret {
-	fill: #fff !important;
+	fill: #fff;
 }
 
 .header .brand-logo {
 	font-size: 1.5rem;
-	margin-left: 5px;
 }
 
 .ticket-card {
