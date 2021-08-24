@@ -53,6 +53,10 @@ export class Locations {
 	}
 
 	serializeCountries(countries) {
+		if (!Array.isArray(countries) || !countries.length) {
+			return {};
+		}
+
 		return countries.reduce((acc, country) => {
 			acc[country.code] = country;
 			return acc;
@@ -75,9 +79,11 @@ export class Locations {
 
 	serializeAirlines(airlines) {
 		return airlines.reduce((acc, item) => {
-			item.logo = `https://pics.avs.io/200/200/${item.code}.png`;
-			item.name = item.name || item.name_translations.en;
-			acc[item.code] = item;
+			const itemCopy = { ...item };
+
+			itemCopy.logo = `https://pics.avs.io/200/200/${itemCopy.code}.png`;
+			itemCopy.name = itemCopy.name || itemCopy.name_translations.en;
+			acc[itemCopy.code] = itemCopy;
 			return acc;
 		}, {});
 	}
