@@ -38,9 +38,66 @@ describe('Form', () => {
 		cy.get(
 			'[data-hook="datepickerDepartWrap"] .datepicker-container .is-today'
 		).as('today');
-
 		cy.get(
 			'[data-hook="datepickerDepartWrap"] .datepicker-container .btn-flat'
 		).as('modalButtons');
+		cy.get('[data-hook="datepickerDepartInput"]').as(
+			'datepickerDepartInput'
+		);
+
+		cy.get('@today').click();
+		cy.get('@today').should('have.class', 'is-selected');
+		cy.get('@modalButtons').contains('Ok').click();
+
+		cy.get('@datepickerDepartInput').then($input => {
+			const val = $input.val();
+			expect(val).to.match(/^\d{4}-\d{2}$/);
+		});
+	});
+
+	it('When clicking return datepicker, the modal opens', () => {
+		cy.get('[data-hook="datepickerReturnInput"]').as(
+			'datepickerReturnInput'
+		);
+		cy.get('[data-hook="datepickerReturnWrap"] .datepicker-container').as(
+			'modalWindow'
+		);
+
+		cy.get('@datepickerReturnInput').click();
+		cy.get('@modalWindow').should('be.visible');
+	});
+
+	it('After selecting return date it should be displayed in the input field in correct format', () => {
+		cy.get(
+			'[data-hook="datepickerReturnWrap"] .datepicker-container td[data-day="28"]'
+		).as('28');
+		cy.get(
+			'[data-hook="datepickerReturnWrap"] .datepicker-container .btn-flat'
+		).as('modalButtons');
+		cy.get('[data-hook="datepickerReturnInput"]').as(
+			'datepickerReturnInput'
+		);
+
+		cy.get('@28').click();
+		cy.get('@28').should('have.class', 'is-selected');
+		cy.get('@modalButtons').contains('Ok').click();
+
+		cy.get('@datepickerReturnInput').then($input => {
+			const val = $input.val();
+			expect(val).to.match(/^\d{4}-\d{2}$/);
+		});
+	});
+
+	it('When selecting currency from header dropdown it should be cnanged and visible', () => {
+		cy.get('[data-hook="currencySelect"] .dropdown-trigger').as(
+			'currencyTrigger'
+		);
+		cy.get('[data-hook="currencySelect"] .dropdown-content li').as(
+			'currencyItem'
+		);
+
+		cy.get('@currencyTrigger').click();
+		cy.get('@currencyItem').contains('Euro').click();
+		cy.get('@currencyTrigger').should('have.value', 'Euro');
 	});
 });
